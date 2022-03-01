@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :orders, only: [:index]
-    get :orders, controller: :orders, action: :index
+    resources :products, only: [:index]
+    get :products, controller: :products, action: :index
   end
 end
