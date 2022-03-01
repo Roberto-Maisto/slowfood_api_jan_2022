@@ -23,7 +23,6 @@ module SlowfoodApi
   class Application < Rails::Application
     config.load_defaults 6.0
     config.api_only = true
-    
     config.generators do |generate|
       generate.helper false
       generate.assets false
