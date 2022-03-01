@@ -11,6 +11,7 @@ gem 'rails', '~> 6.0.2'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.7'
 gem 'rack-cors', require: 'rack/cors'
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 
 group :development, :test do
   gem 'coveralls', require: false
