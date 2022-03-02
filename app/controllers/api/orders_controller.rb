@@ -1,6 +1,6 @@
 class Api::OrdersController < ApplicationController
   def create
-    order = Order.create(user: current_user)
+    order = current_user.orders.create
     product = Product.find(params[:product_id])
     order.items.create(product: product)
 
