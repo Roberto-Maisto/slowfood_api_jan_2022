@@ -21,6 +21,10 @@ RSpec.describe 'PUT /api/orders', type: :request do
     it 'is expected to respond with a message' do
       expect(response_json['message']).to eq 'Your order was updated...'
     end
+
+    it 'is expected to add another item to order' do
+      expect(order.items.size).to eq 2
+    end
   end
 
   describe 'without valid parameters' do
