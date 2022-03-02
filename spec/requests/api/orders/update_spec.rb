@@ -7,9 +7,10 @@ RSpec.describe 'PUT /api/orders', type: :request do
 
   subject { response }
 
+  before { order.items.create(product: product_1)  }
+
   describe 'with valid parameters and credentials' do
     before do
-      order.items.create(product: product_1)
       put "/api/orders/#{order.id}",
           params: { product_id: product_2.id },
           headers: credentials
@@ -24,7 +25,6 @@ RSpec.describe 'PUT /api/orders', type: :request do
 
   describe 'without valid parameters' do
     before do
-      order.items.create(product: product_1)
       put "/api/orders/#{order.id}",
           params: { product_id: nil },
           headers: credentials
@@ -39,7 +39,6 @@ RSpec.describe 'PUT /api/orders', type: :request do
 
   describe 'without valid credentials' do
     before do
-      order.items.create(product: product_1)
       put "/api/orders/#{order.id}",
           params: { product_id: product_2.id },
           headers: nil
