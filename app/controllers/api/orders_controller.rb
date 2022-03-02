@@ -1,5 +1,5 @@
 class Api::OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: %i[create update]
 
   def create
     product = Product.find(params[:product_id])
@@ -14,5 +14,4 @@ class Api::OrdersController < ApplicationController
     order.items.create(product: product)
     render json: { message: 'Your order was updated...' }
   end
-
 end
