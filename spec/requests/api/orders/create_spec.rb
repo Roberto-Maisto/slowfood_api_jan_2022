@@ -1,7 +1,7 @@
 RSpec.describe 'POST /api/orders', type: :request do
   let(:product) { create(:product) }
   let(:user) { create(:user) }
-  let(:credentials) { user.create_auth_token }
+  let(:credentials) { user.create_new_auth_token }
   before do
     post '/api/orders',
          params: {
