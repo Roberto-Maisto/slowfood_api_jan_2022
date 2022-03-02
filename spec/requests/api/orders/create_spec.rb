@@ -2,6 +2,7 @@ RSpec.describe 'POST /api/orders', type: :request do
   let(:product) { create(:product) }
   let(:user) { create(:user) }
   let(:credentials) { user.create_new_auth_token }
+  subject { response }
 
   describe 'with valid params and headers' do
     before do
@@ -14,11 +15,9 @@ RSpec.describe 'POST /api/orders', type: :request do
       @order = Order.last
     end
 
-    subject { response }
-
     it { is_expected.to have_http_status 201 }
 
-    it 'is expected to responde with a message' do
+    it 'is expected to respond with a message' do
       expect(response_json['message']).to eq 'Your order was created...'
     end
 
@@ -32,10 +31,26 @@ RSpec.describe 'POST /api/orders', type: :request do
   end
 
   describe 'without valid parameters' do
-    # what should happen when product_id is either missing or Product is not found in the DB?
+    before do
+      post '/api/orders', params: { product_id: nil }, headers: credentials
+    end
+
+    it { is_expected.to have_http_status 422 }
+
+    it 'is expected to respond with an error' do
+      expect(response_json['error']).to eq 'Your request could not be processed...'
+    end
   end
 
   describe 'without valid authentication credentials in headers' do
-    # what should happen when no headers are being passed in?
+    before do
+      post '/api/orders', params: { product_id: product.id }, headers: nil
+    end
+
+    it { is_expected.to have_http_status 401 }
+
+    it 'is expected to respond with an error' do
+      expect(response_json['errors']).to include 'You need to sign in or sign up before continuing.'
+    end
   end
 end
