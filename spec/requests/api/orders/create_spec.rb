@@ -21,6 +21,10 @@ RSpec.describe 'POST /api/orders', type: :request do
       expect(response_json['message']).to eq 'Your order was created...'
     end
 
+    it 'is expected to respond with order details' do
+      expect(response_json['order']).not_to be nil
+    end
+
     it 'is expected to associate the order with the user' do
       expect(@order.user).to eq user
     end

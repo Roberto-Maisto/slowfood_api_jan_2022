@@ -5,7 +5,7 @@ class Api::OrdersController < ApplicationController
   def create
     order = current_user.orders.create
     order.items.create(product: @product)
-    render json: { message: 'Your order was created...' }, status: 201
+    render json: { message: 'Your order was created...', order: {id: order.id} }, status: 201
   end
 
   def update
