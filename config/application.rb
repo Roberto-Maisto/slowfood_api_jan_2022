@@ -24,7 +24,9 @@ module SlowfoodApi
     initializer(:remove_activestorage_routes, after: :add_routing_paths) do |app|
       app.routes_reloader.paths.delete_if { |path| path =~ /activestorage|actionmailbox/ }
     end
+
     config.load_defaults 6.0
+
     config.api_only = true
 
     config.generators do |generate|
